@@ -24,7 +24,6 @@ const CountdownTimer = () => {
 
             return () => clearInterval(countdownInterval);
         }
-
     }, [countdownStarted, eventDate, timeRemaining]);
 
     useEffect(() => {
@@ -54,6 +53,11 @@ const CountdownTimer = () => {
     };
 
     const formatDate = (date) => {
+        const options = { month: "long" , day: "numeric", year: "numeric" };
+        return new Date(date).toLocaleDateString("en-US", options);
+    };
+
+    const formatTime = (time) => {
         const seconds = Math.floor((time / 1000) % 60);
         const minutes = Math.floor((time / (1000 * 60)) % 60);
         const hours = Math.floor((time / (1000 * 60 * 60)) % 24);
@@ -82,6 +86,9 @@ const CountdownTimer = () => {
             <h2 className="countdown-name">
                 {countdownStarted ? eventName: "Countdown Timer"}
             </h2>
+            <p className="countdown-date">
+                {countdownStarted && formatDate(eventDate)}
+            </p>
 
             {!countdownStarted ? (
                 <form className="countdown-form">
@@ -104,13 +111,15 @@ const CountdownTimer = () => {
                     />
                     <button onClick={handleSetCountdown}>Start Countdown</button>
                 </form>
-            )}
-        
-            <div className="control-buttons">
-                <button onClick={handleStopCountdown}>Stop</button>
-                <button onClick={handleResetCountdown}>Reset</button>
-            </div>
-            
+            ) : (
+                <>
+                    {formatTime(timeRemaining)}
+                    <div className="control-buttons">
+                        <button onClick={handleStopCountdown}>Stop</button>
+                        <button onClick={handleResetCountdown}>Reset</button>
+                    </div>
+                </>
+            )}           
         </div>
     );
 };
