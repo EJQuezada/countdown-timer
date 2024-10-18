@@ -127,7 +127,6 @@ button:hover {
   background-color: #0b7c71;
 }
 
-
 @media only screen and (max-width: 600px) {
   .countdown-form {
     width: 90%;
