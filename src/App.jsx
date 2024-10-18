@@ -1,5 +1,5 @@
 import React from "react";
-import CountdownTimer from "./assets/components/CountDown";
+import CountdownTimer from "./components/CountDown";
 
 function App() {
   return (
